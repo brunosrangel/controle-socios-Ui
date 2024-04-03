@@ -20,6 +20,8 @@ export class AuthService {
 
      return this.httpClient.post<any>(apiUrlUsuario + "/login", usuario).pipe(
         tap((resposta) => {
+          console.log(resposta);
+          debugger
           if(!resposta.sucesso) return;
 
           localStorage.setItem('token', btoa(JSON.stringify(resposta['token'])));

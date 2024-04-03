@@ -1,3 +1,4 @@
+import { TokenInterceptor } from './service/interceptors/token.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +22,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './Pages/home/home.component';
-import { TokenInterceptor } from '../../src/app/service/interceptors/token.interceptor';
+
 
 @NgModule({
   declarations: [

@@ -22,14 +22,14 @@ export class TokenInterceptor implements HttpInterceptor {
                     token: `${token}`
                 }
             });
-            return next.handle(request).pipe(
-              catchError(error => {
-                  if (error instanceof HttpErrorResponse && error.status === 401) {
-                      this._authService.deslogar();
-                  }
-                  return throwError(error.message); // ou outro Observable de erro
-              })
-          );
+return next.handle(request).pipe(
+    catchError(error => {
+        if (error instanceof HttpErrorResponse && error.status === 401) {
+            this._authService.deslogar();
+        }
+        return throwError(error.message); // ou outro Observable de erro
+    })
+);
             // return next.handle(request).pipe(catchError(error => {
             //     if (error instanceof HttpErrorResponse && error.status === 401)
             //       this._authService.deslogar();

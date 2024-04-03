@@ -1,0 +1,38 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "20829000000007001",
+      "name": "SistemaBrunoOXis",
+      "domain": {
+        "id": "10077671679",
+        "name": "sistemabrunooxis-849893981.development"
+      },
+      "timezone": "America/Sao_Paulo",
+      "env": [
+        {
+          "idx": 1,
+          "id": "849893981",
+          "name": "Development",
+          "type": 3,
+          "env_status": "Active",
+          "project_details": {
+            "project_name": "SistemaBrunoOXis",
+            "id": "20829000000007001",
+            "project_type": "Live"
+          },
+          "is_default": true,
+          "action_required": false
+        }
+      ]
+    }
+  ]
+}
