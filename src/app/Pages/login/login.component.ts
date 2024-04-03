@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../service/auth.service';
 import { IUsuario } from '../../interfaces/IUsuario';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

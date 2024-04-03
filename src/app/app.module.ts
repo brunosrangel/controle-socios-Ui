@@ -1,3 +1,4 @@
+import { LoginComponent } from './Pages/login/login.component';
 import { TokenInterceptor } from './service/interceptors/token.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,7 +15,7 @@ import { PrincipalComponent } from './pages/compartilhado/principal/principal.co
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
-import { LoginComponent } from './pages/login/login.component';
+
 
 
 import { MatCardModule } from '@angular/material/card';
