@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { PrincipalComponent } from './pages/compartilhado/principal/principal.component';
+import { PrincipalComponent } from './Pages/Compartilhado/Principal/principal.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './Pages/home/home.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { HomeComponent } from './Pages/home/home.component';
     LoginComponent,
     AdminComponent,
      HomeComponent,
-    PrincipalComponent
+    PrincipalComponent,
+
 
   ],
   imports: [
@@ -48,7 +51,8 @@ import { HomeComponent } from './Pages/home/home.component';
     MatToolbarModule,
     MatIconModule,
     MatSnackBarModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }

@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable , catchError, retry, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
-import { IUsuario } from '../interfaces/IUsuario';
+import { IUsuario } from '../Interfaces/IUsuario';
+import { ApiResponse } from '../Interfaces/ApiResponse';
 
 const apiUrlUsuario = environment.apiUrl + "usuario";
 
@@ -12,32 +12,22 @@ const apiUrlUsuario = environment.apiUrl + "usuario";
   providedIn: 'root'
 })
 export class AuthService {
+  toastr: any;
 
   constructor(private httpClient: HttpClient,
     private router: Router) { }
+  // Headers
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 
-    logar(usuario: IUsuario) : Observable<any> {
+}
+    logar(usuario: IUsuario): Observable<ApiResponse> {
 
-     return this.httpClient.post<any>(apiUrlUsuario + "/login", usuario).pipe(
-        tap((resposta) => {
-          console.log(resposta);
-          debugger
-          if(!resposta.sucesso) return;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.httpClient.post<ApiResponse>(`${apiUrlUsuario}/login`, usuario, { headers });
 
-          localStorage.setItem('token', btoa(JSON.stringify(resposta['token'])));
-          localStorage.setItem('usuario', btoa(JSON.stringify(resposta['usuario'])));
-
-          this.router.navigate(['']);
-        }));
-
-        // return this.mockUsuarioLogin(usuario).pipe(tap((resposta) => {
-        //   if(!resposta.sucesso) return;
-
-        //   localStorage.setItem('token', btoa(JSON.stringify("TokenQueSeriaGeradoPelaAPI")));
-        //   localStorage.setItem('usuario', btoa(JSON.stringify(usuario)));
-        //   this.router.navigate(['']);
-        // }));
     }
+
     get obterIdUsuarioLogado(): any {
       return localStorage.getItem('usuario')
     }
@@ -55,4 +45,28 @@ export class AuthService {
       this.router.navigate(['login']);
   }
 
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Erro ocorreu no lado do client
+      errorMessage = error.error.message;
+      this.showError(errorMessage)
+    } else {
+      // Erro ocorreu no lado do servidor
+
+      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+      this.showError(errorMessage)
+    }
+    return throwError(errorMessage);
+  };
+
+  showSuccess(msg : string) {
+    this.toastr.success(msg);
+  }
+  showError(msg : string) {
+    this.toastr.error(msg);
+  }
+
 }
+
+

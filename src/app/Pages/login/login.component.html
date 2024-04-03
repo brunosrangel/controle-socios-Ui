@@ -7,20 +7,20 @@
       <mat-card-content class="conteudo-login">
 
         <mat-form-field appearance="outline" class="form-field-full">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="email" placeholder="Ex. email@example.com">
-          <mat-error *ngIf="formLogin.get('email')?.hasError('email') && formLogin.get('email')?.touched">
+          <mat-label>login</mat-label>
+          <input type="login" matInput formControlName="login" placeholder="Ex. email@example.com">
+          <mat-error *ngIf="formLogin.get('login')?.hasError('login') && formLogin.get('login')?.touched">
             Por favor informe um email válido
           </mat-error>
-          <mat-error *ngIf="formLogin.get('email')?.hasError('required') && formLogin.get('email')?.touched">
+          <mat-error *ngIf="formLogin.get('login')?.hasError('required') && formLogin.get('login')?.touched">
             Email é <strong>obrigatório</strong>
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field-full">
           <mat-label>Senha</mat-label>
-          <input type="password" matInput formControlName="senha">
-          <mat-error *ngIf="formLogin.get('senha')?.invalid && formLogin.get('senha')?.touched">Senha é
+          <input type="password" matInput formControlName="password">
+          <mat-error *ngIf="formLogin.get('password')?.invalid && formLogin.get('password')?.touched">Senha é
             <strong>obrigatória</strong>
           </mat-error>
         </mat-form-field>
