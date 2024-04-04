@@ -1,0 +1,33 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Barra lateral -->
+  <mat-sidenav #sidenav class="sidenav" fixedInViewport [opened]="true" mode="side">
+    <!-- Seu conteúdo da barra lateral aqui -->
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" *ngIf="usuarioAutenticado">Dashboard</a>
+      <a mat-list-item routerLink="/perfil" *ngIf="usuarioAutenticado">Perfil</a>
+      <a mat-list-item routerLink="/configuracoes" *ngIf="usuarioAdministrador">Configurações</a>
+      <!-- Adicione mais links conforme necessário -->
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Barra superior -->
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span> Bem Vindo {{nomeUsuario}} ao mundo de Xis</span>
+      <span class="fill-remaining-space"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Perfil</button>
+        <button mat-menu-item (click)="deslogar()">Sair</button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- Conteúdo central -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

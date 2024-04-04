@@ -1,0 +1,36 @@
+.espacamento-toolbar {
+  flex: 1 1 auto;
+}
+
+/* Adicione estilos específicos para o componente do dashboard aqui */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh; /* Define a altura total do container */
+}
+
+.sidebar {
+  width: 250px; /* Largura da barra lateral */
+  background-color: #333; /* Cor de fundo da barra lateral */
+  color: #fff; /* Cor do texto na barra lateral */
+}
+
+.main-content {
+  flex-grow: 1; /* O conteúdo principal ocupa o espaço restante */
+  padding: 20px; /* Espaçamento interno do conteúdo principal */
+}
+
+.top-bar {
+  height: 60px; /* Altura da barra superior */
+  background-color: #444; /* Cor de fundo da barra superior */
+  color: #fff; /* Cor do texto na barra superior */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Espaçamento interno horizontal da barra superior */
+}
+
+.content {
+  padding: 20px; /* Espaçamento interno do conteúdo */
+}

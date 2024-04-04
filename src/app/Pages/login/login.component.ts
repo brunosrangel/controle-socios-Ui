@@ -7,6 +7,9 @@ import { IUsuario } from '../../Interfaces/IUsuario';
 import { Router } from '@angular/router';
 import { ApiResponse } from '../../Interfaces/ApiResponse';
 import { Observable } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
+import { jwtDecode } from "jwt-decode";
+import { JwtPayload } from '../../Interfaces/JwtPayload';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private _authService: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -32,39 +36,6 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
     });
   }
-  // logar(){
-  //   if(this.formLogin.invalid) return;
-
-  //   var usuario = this.formLogin.getRawValue() as IUsuario;
-  //   debugger
-
-  //   (await this._authService.logar(usuario)).subscribe((data: ApiResponse) => {
-  //     console.log(data);
-  //     return data;
-  //   })
-
-  //     // error: (err)=>{
-  //     //   this.snackBar.open('Falha na autenticação', 'Usuário ou senha incorretos.', {
-  //     //     duration: 3000
-  //     //   });
-  //     // },
-  //     // complete:()=>{}
-
-  //   ;(await
-  //     // error: (err)=>{
-  //     //   this.snackBar.open('Falha na autenticação', 'Usuário ou senha incorretos.', {
-  //     //     duration: 3000
-  //     //   });
-  //     // },
-  //     // complete:()=>{}
-  //     this._authService.logar(usuario)).subscribe((response) => {
-  //     console.log(response)
-  //       if(!response.sucesso){
-  //         console.log(response)
-
-  //       }
-  //   })
-  // }
   async logar() {
     if (this.formLogin.invalid) return;
 
@@ -75,6 +46,12 @@ export class LoginComponent implements OnInit {
       if(data.statusCode == 200)
       {
         console.log(JSON.stringify(data.data));
+        console.log(jwtDecode<JwtPayload>(data.data.toString()));
+        var tokenDecode = jwtDecode<JwtPayload>(data.data.toString());
+
+        this.cookieService.set('token', data.data.toString(), tokenDecode.exp);
+        this.cookieService.set('nomeUsuario', tokenDecode.nomeUsuario, tokenDecode.exp);
+        this.cookieService.set('login', tokenDecode.login, tokenDecode.exp);
         localStorage.setItem('token', JSON.stringify(data.data));
         this.router.navigate(['']);
 

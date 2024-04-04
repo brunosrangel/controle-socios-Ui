@@ -6,11 +6,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './Pages/login/login.component';
 import { PrincipalComponent } from './Pages/Compartilhado/Principal/principal.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UsuarioNaoAutenticadoGuard]},
   {
-    path: '', component: PrincipalComponent, canActivate: [UsuarioAutenticadoGuard],
+    path: '', component: DashboardComponent, canActivate: [UsuarioAutenticadoGuard],
     children: [
       { path: '', component: HomeComponent }
     ],
