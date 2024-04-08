@@ -6,7 +6,13 @@
       <a mat-list-item routerLink="/dashboard" *ngIf="usuarioAutenticado">Dashboard</a>
       <a mat-list-item routerLink="/perfil" *ngIf="usuarioAutenticado">Perfil</a>
       <a mat-list-item routerLink="/configuracoes" *ngIf="usuarioAdministrador">Configurações</a>
-      <!-- Adicione mais links conforme necessário -->
+           <!-- Adicione mais links conforme necessário -->
+           <a mat-list-item [matMenuTriggerFor]="menu">Gestão de Pessoas</a>
+           <mat-menu #menu="matMenu">
+             <button mat-menu-item routerLink="/cadastro-usuario">Usuários</button>
+             <button mat-menu-item routerLink="/entidades">Entidade</button>
+           </mat-menu>
+
     </mat-nav-list>
   </mat-sidenav>
 
@@ -29,5 +35,6 @@
 
     <!-- Conteúdo central -->
     <router-outlet></router-outlet>
+
   </mat-sidenav-content>
 </mat-sidenav-container>

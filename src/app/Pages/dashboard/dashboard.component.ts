@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from './../../service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,8 @@ export class DashboardComponent implements OnInit{
   usuarioAutenticado: boolean = true; // Altere conforme necessário
   usuarioAdministrador: boolean = true; // Altere conforme necessário
   nomeUsuario!: string;
+  @ViewChild('drawer') drawer!: MatSidenav;
+  isMenuOpen = false;
 
   constructor(private _authService: AuthService,private cookieService: CookieService) { }
 
@@ -29,5 +32,9 @@ export class DashboardComponent implements OnInit{
     this._authService.deslogar();
   }
 
-  // Adicione métodos e lógica adicionais conforme necessário
+  toggleSidenav() {
+    this.drawer.toggle();
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
 }

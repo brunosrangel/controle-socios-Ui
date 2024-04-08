@@ -1,0 +1,54 @@
+<!-- cadastro-entidade.component.html -->
+<mat-card class="card">
+  <form id="add-form-entidade" (ngSubmit)="f.form.valid && salvarEntidade(f)" #f="ngForm" novalidate>
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="example-input">
+        <mat-label>Nome da Entidade</mat-label>
+        <input matInput [(ngModel)]="_entidade.descricaoEntidade" name="descricaoEntidade" #descricaoEntidade="ngModel" required>
+      </mat-form-field>
+      <mat-error *ngIf="f.submitted && descricaoEntidade.invalid">Nome da Entidade é obrigatório</mat-error>
+
+    </div>
+    <div class="form-group">
+      <mat-radio-group name="statusEntidade" [(ngModel)]="_entidade.statusEntidade" required>
+        <mat-radio-button value="true">Ativo</mat-radio-button>
+        <mat-radio-button value="false">Inativo</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="f.submitted && !_entidade.statusEntidade">O status é obrigatório</mat-error>
+    </div>
+    <button mat-raised-button type="submit" color="primary" [disabled]="saving">
+      <span *ngIf="!saving">Salvar</span>
+      <mat-spinner *ngIf="saving" diameter="20" color="accent"></mat-spinner>
+    </button>
+  </form>
+
+
+
+</mat-card>
+
+<!-- lista-entidades.component.html -->
+<table mat-table [dataSource]="ListaEntidades" class="mat-elevation-z8">
+  <!-- Colunas da tabela -->
+  <ng-container matColumnDef="descricaoEntidade">
+    <th mat-header-cell *matHeaderCellDef> Descrição </th>
+    <td mat-cell *matCellDef="let entidade"> {{ entidade.descricaoEntidade }} </td>
+  </ng-container>
+  <ng-container matColumnDef="statusEntidade">
+    <th mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let entidade"> {{ entidade.statusEntidade ? 'Ativo' : 'Inativo' }} </td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Ações </th>
+    <td mat-cell *matCellDef="let entidade">
+      <button mat-icon-button color="primary" (click)="editarEntidade(entidade)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="excluirEntidade(entidade)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

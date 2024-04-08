@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://brunooxis.somee.com/api/'
+  apiUrl: 'https://brunooxis.somee.com/api/'
 };
 
 /*

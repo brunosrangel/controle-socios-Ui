@@ -11,6 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from "jwt-decode";
 import { JwtPayload } from '../../Interfaces/JwtPayload';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -41,14 +42,9 @@ export class LoginComponent implements OnInit {
 
     var usuario = this.formLogin.getRawValue() as IUsuario;
     this._authService.logar(usuario).subscribe((data) => {
-      console.log("data.StatusCode : " +data.statusCode);
-      debugger
       if(data.statusCode == 200)
       {
-        console.log(JSON.stringify(data.data));
-        console.log(jwtDecode<JwtPayload>(data.data.toString()));
         var tokenDecode = jwtDecode<JwtPayload>(data.data.toString());
-
         this.cookieService.set('token', data.data.toString(), tokenDecode.exp);
         this.cookieService.set('nomeUsuario', tokenDecode.nomeUsuario, tokenDecode.exp);
         this.cookieService.set('login', tokenDecode.login, tokenDecode.exp);

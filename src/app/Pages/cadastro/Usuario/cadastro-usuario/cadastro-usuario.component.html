@@ -1,0 +1,47 @@
+<form id="add-form-usuario" (ngSubmit)="f.form.valid && cadastrarUsuario(f)" #f="ngForm" novalidate>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Nome do usuário</mat-label>
+    <input matInput [(ngModel)]="_usuario.nomeUsuario" name="nomeUsuario" #nomeUsuario="ngModel" required>
+    <mat-error *ngIf="f.submitted && nomeUsuario.invalid">Nome do Usuário é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="_usuario.email" name="email" #email="ngModel" required>
+    <mat-error *ngIf="f.submitted && email.invalid">Email é obrigatório</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Senha</mat-label>
+    <input type="password" matInput [(ngModel)]="_usuario.senha" name="senha" #senha="ngModel" required>
+    <mat-error *ngIf="f.submitted && senha.invalid">Senha é obrigatória</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Escolaridade</mat-label>
+    <mat-select [(ngModel)]="_usuario.escolaridade" name="escolaridade" required>
+      <mat-option *ngFor="let escolaridade of ListaEscolaridades" [value]="escolaridade.id">{{escolaridade.descricaoEscolaridade}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Entidade</mat-label>
+    <mat-select [(ngModel)]="_usuario.entidade" name="entidade" required>
+      <mat-option *ngFor="let entidade of entidades" [value]="entidade.id">{{entidade.descricaoEntidade}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Perfil</mat-label>
+    <mat-select [(ngModel)]="_usuario.perfil" name="perfil" required>
+      <mat-option *ngFor="let perfil of perfis" [value]="perfil.id">{{perfil.descricaoPerfil}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Botão para cadastrar usuário -->
+  <button mat-raised-button type="submit" color="primary" [disabled]="saving">
+    <span *ngIf="!saving">Salvar</span>
+    <mat-spinner *ngIf="saving" diameter="20" color="accent"></mat-spinner>
+  </button>
+</form>
